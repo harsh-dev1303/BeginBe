@@ -2,8 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:secure_fintech_bankingapp/core/error/failures.dart';
 import 'package:secure_fintech_bankingapp/core/typedefs.dart';
 import 'package:secure_fintech_bankingapp/features/auth/data/datasource/auth_datasource.dart';
-import 'package:secure_fintech_bankingapp/features/auth/domain/entity/login_success_entity.dart';
-import 'package:secure_fintech_bankingapp/features/auth/domain/entity/signup_success_entity.dart';
+import 'package:secure_fintech_bankingapp/features/auth/domain/entity/login_entity/login_success_entity.dart';
+import 'package:secure_fintech_bankingapp/features/auth/domain/entity/signup_entity/signup_success_entity.dart';
 import 'package:secure_fintech_bankingapp/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepoImpl implements AuthRepository {
@@ -27,11 +27,12 @@ class AuthRepoImpl implements AuthRepository {
 
   @override
   ResultEither<SignupSuccessEntity> singUp({
+    required String name,
     required String email, 
     required String password}) async {
       try{
         print("signup in repoIml called");
-         final signUpRes = await authDatasource.signUp(email: email, password: password);
+         final signUpRes = await authDatasource.signUp(name: name,email: email, password: password);
          print("signupResponse toDomain:${signUpRes.toDomain()}");
          return Either.right(signUpRes.toDomain());
       }on ServiceFailure catch(e){

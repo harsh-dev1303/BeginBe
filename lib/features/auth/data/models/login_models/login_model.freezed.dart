@@ -21,6 +21,9 @@ LoginModel _$LoginModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginModel {
+  @JsonKey(name: "user")
+  LoginUserModel get loginUserModel => throw _privateConstructorUsedError;
+  @JsonKey(name: "token")
   String get token => throw _privateConstructorUsedError;
 
   /// Serializes this LoginModel to a JSON map.
@@ -40,7 +43,12 @@ abstract class $LoginModelCopyWith<$Res> {
     $Res Function(LoginModel) then,
   ) = _$LoginModelCopyWithImpl<$Res, LoginModel>;
   @useResult
-  $Res call({String token});
+  $Res call({
+    @JsonKey(name: "user") LoginUserModel loginUserModel,
+    @JsonKey(name: "token") String token,
+  });
+
+  $LoginUserModelCopyWith<$Res> get loginUserModel;
 }
 
 /// @nodoc
@@ -57,9 +65,13 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? token = null}) {
+  $Res call({Object? loginUserModel = null, Object? token = null}) {
     return _then(
       _value.copyWith(
+            loginUserModel: null == loginUserModel
+                ? _value.loginUserModel
+                : loginUserModel // ignore: cast_nullable_to_non_nullable
+                      as LoginUserModel,
             token: null == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
@@ -67,6 +79,16 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of LoginModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginUserModelCopyWith<$Res> get loginUserModel {
+    return $LoginUserModelCopyWith<$Res>(_value.loginUserModel, (value) {
+      return _then(_value.copyWith(loginUserModel: value) as $Val);
+    });
   }
 }
 
@@ -79,7 +101,13 @@ abstract class _$$LoginModelImplCopyWith<$Res>
   ) = __$$LoginModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token});
+  $Res call({
+    @JsonKey(name: "user") LoginUserModel loginUserModel,
+    @JsonKey(name: "token") String token,
+  });
+
+  @override
+  $LoginUserModelCopyWith<$Res> get loginUserModel;
 }
 
 /// @nodoc
@@ -95,9 +123,13 @@ class __$$LoginModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? token = null}) {
+  $Res call({Object? loginUserModel = null, Object? token = null}) {
     return _then(
       _$LoginModelImpl(
+        loginUserModel: null == loginUserModel
+            ? _value.loginUserModel
+            : loginUserModel // ignore: cast_nullable_to_non_nullable
+                  as LoginUserModel,
         token: null == token
             ? _value.token
             : token // ignore: cast_nullable_to_non_nullable
@@ -110,17 +142,24 @@ class __$$LoginModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LoginModelImpl extends _LoginModel {
-  _$LoginModelImpl({required this.token}) : super._();
+  _$LoginModelImpl({
+    @JsonKey(name: "user") required this.loginUserModel,
+    @JsonKey(name: "token") required this.token,
+  }) : super._();
 
   factory _$LoginModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginModelImplFromJson(json);
 
   @override
+  @JsonKey(name: "user")
+  final LoginUserModel loginUserModel;
+  @override
+  @JsonKey(name: "token")
   final String token;
 
   @override
   String toString() {
-    return 'LoginModel(token: $token)';
+    return 'LoginModel(loginUserModel: $loginUserModel, token: $token)';
   }
 
   @override
@@ -128,12 +167,14 @@ class _$LoginModelImpl extends _LoginModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginModelImpl &&
+            (identical(other.loginUserModel, loginUserModel) ||
+                other.loginUserModel == loginUserModel) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, token);
+  int get hashCode => Object.hash(runtimeType, loginUserModel, token);
 
   /// Create a copy of LoginModel
   /// with the given fields replaced by the non-null parameter values.
@@ -150,13 +191,20 @@ class _$LoginModelImpl extends _LoginModel {
 }
 
 abstract class _LoginModel extends LoginModel {
-  factory _LoginModel({required final String token}) = _$LoginModelImpl;
+  factory _LoginModel({
+    @JsonKey(name: "user") required final LoginUserModel loginUserModel,
+    @JsonKey(name: "token") required final String token,
+  }) = _$LoginModelImpl;
   _LoginModel._() : super._();
 
   factory _LoginModel.fromJson(Map<String, dynamic> json) =
       _$LoginModelImpl.fromJson;
 
   @override
+  @JsonKey(name: "user")
+  LoginUserModel get loginUserModel;
+  @override
+  @JsonKey(name: "token")
   String get token;
 
   /// Create a copy of LoginModel

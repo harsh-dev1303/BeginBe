@@ -21,8 +21,9 @@ SignupModel _$SignupModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SignupModel {
-  @JsonKey(name: "id")
-  int get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: "user")
+  SignupUser get singUpUser => throw _privateConstructorUsedError;
+  @JsonKey(name: "token")
   String get token => throw _privateConstructorUsedError;
 
   /// Serializes this SignupModel to a JSON map.
@@ -42,7 +43,12 @@ abstract class $SignupModelCopyWith<$Res> {
     $Res Function(SignupModel) then,
   ) = _$SignupModelCopyWithImpl<$Res, SignupModel>;
   @useResult
-  $Res call({@JsonKey(name: "id") int userId, String token});
+  $Res call({
+    @JsonKey(name: "user") SignupUser singUpUser,
+    @JsonKey(name: "token") String token,
+  });
+
+  $SignupUserCopyWith<$Res> get singUpUser;
 }
 
 /// @nodoc
@@ -59,13 +65,13 @@ class _$SignupModelCopyWithImpl<$Res, $Val extends SignupModel>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? userId = null, Object? token = null}) {
+  $Res call({Object? singUpUser = null, Object? token = null}) {
     return _then(
       _value.copyWith(
-            userId: null == userId
-                ? _value.userId
-                : userId // ignore: cast_nullable_to_non_nullable
-                      as int,
+            singUpUser: null == singUpUser
+                ? _value.singUpUser
+                : singUpUser // ignore: cast_nullable_to_non_nullable
+                      as SignupUser,
             token: null == token
                 ? _value.token
                 : token // ignore: cast_nullable_to_non_nullable
@@ -73,6 +79,16 @@ class _$SignupModelCopyWithImpl<$Res, $Val extends SignupModel>
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of SignupModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $SignupUserCopyWith<$Res> get singUpUser {
+    return $SignupUserCopyWith<$Res>(_value.singUpUser, (value) {
+      return _then(_value.copyWith(singUpUser: value) as $Val);
+    });
   }
 }
 
@@ -85,7 +101,13 @@ abstract class _$$SignupModelImplCopyWith<$Res>
   ) = __$$SignupModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "id") int userId, String token});
+  $Res call({
+    @JsonKey(name: "user") SignupUser singUpUser,
+    @JsonKey(name: "token") String token,
+  });
+
+  @override
+  $SignupUserCopyWith<$Res> get singUpUser;
 }
 
 /// @nodoc
@@ -101,13 +123,13 @@ class __$$SignupModelImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? userId = null, Object? token = null}) {
+  $Res call({Object? singUpUser = null, Object? token = null}) {
     return _then(
       _$SignupModelImpl(
-        userId: null == userId
-            ? _value.userId
-            : userId // ignore: cast_nullable_to_non_nullable
-                  as int,
+        singUpUser: null == singUpUser
+            ? _value.singUpUser
+            : singUpUser // ignore: cast_nullable_to_non_nullable
+                  as SignupUser,
         token: null == token
             ? _value.token
             : token // ignore: cast_nullable_to_non_nullable
@@ -121,22 +143,23 @@ class __$$SignupModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SignupModelImpl extends _SignupModel {
   _$SignupModelImpl({
-    @JsonKey(name: "id") required this.userId,
-    required this.token,
+    @JsonKey(name: "user") required this.singUpUser,
+    @JsonKey(name: "token") required this.token,
   }) : super._();
 
   factory _$SignupModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SignupModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "id")
-  final int userId;
+  @JsonKey(name: "user")
+  final SignupUser singUpUser;
   @override
+  @JsonKey(name: "token")
   final String token;
 
   @override
   String toString() {
-    return 'SignupModel(userId: $userId, token: $token)';
+    return 'SignupModel(singUpUser: $singUpUser, token: $token)';
   }
 
   @override
@@ -144,13 +167,14 @@ class _$SignupModelImpl extends _SignupModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignupModelImpl &&
-            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.singUpUser, singUpUser) ||
+                other.singUpUser == singUpUser) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, token);
+  int get hashCode => Object.hash(runtimeType, singUpUser, token);
 
   /// Create a copy of SignupModel
   /// with the given fields replaced by the non-null parameter values.
@@ -168,8 +192,8 @@ class _$SignupModelImpl extends _SignupModel {
 
 abstract class _SignupModel extends SignupModel {
   factory _SignupModel({
-    @JsonKey(name: "id") required final int userId,
-    required final String token,
+    @JsonKey(name: "user") required final SignupUser singUpUser,
+    @JsonKey(name: "token") required final String token,
   }) = _$SignupModelImpl;
   _SignupModel._() : super._();
 
@@ -177,9 +201,10 @@ abstract class _SignupModel extends SignupModel {
       _$SignupModelImpl.fromJson;
 
   @override
-  @JsonKey(name: "id")
-  int get userId;
+  @JsonKey(name: "user")
+  SignupUser get singUpUser;
   @override
+  @JsonKey(name: "token")
   String get token;
 
   /// Create a copy of SignupModel

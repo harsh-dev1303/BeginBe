@@ -106,6 +106,53 @@ class AppShellRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [BranchesPage]
+class BranchesRoute extends PageRouteInfo<BranchesRouteArgs> {
+  BranchesRoute({
+    Key? key,
+    required String serviceId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         BranchesRoute.name,
+         args: BranchesRouteArgs(key: key, serviceId: serviceId),
+         initialChildren: children,
+       );
+
+  static const String name = 'BranchesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BranchesRouteArgs>();
+      return BranchesPage(key: args.key, serviceId: args.serviceId);
+    },
+  );
+}
+
+class BranchesRouteArgs {
+  const BranchesRouteArgs({this.key, required this.serviceId});
+
+  final Key? key;
+
+  final String serviceId;
+
+  @override
+  String toString() {
+    return 'BranchesRouteArgs{key: $key, serviceId: $serviceId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BranchesRouteArgs) return false;
+    return key == other.key && serviceId == other.serviceId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ serviceId.hashCode;
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})

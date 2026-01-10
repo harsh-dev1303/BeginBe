@@ -8,9 +8,9 @@ part of 'signup_model.dart';
 
 _$SignupModelImpl _$$SignupModelImplFromJson(Map<String, dynamic> json) =>
     _$SignupModelImpl(
-      userId: (json['id'] as num).toInt(),
+      singUpUser: SignupUser.fromJson(json['user'] as Map<String, dynamic>),
       token: json['token'] as String,
     );
 
 Map<String, dynamic> _$$SignupModelImplToJson(_$SignupModelImpl instance) =>
-    <String, dynamic>{'id': instance.userId, 'token': instance.token};
+    <String, dynamic>{'user': instance.singUpUser, 'token': instance.token};

@@ -46,7 +46,7 @@ class NetworkInterceptor implements InterceptorInterface {
       // 'Accept-Language': options.headers['Accept-Language'] ?? localeId,
       'channel': 'MB',
       // 'unit': options.headers['unit'] ?? unit,
-      'x-api-key': reqResApiKey,
+      // 'x-api-key': reqResApiKey,
     };
 
     options.headers.addAll(commonHeaders);
@@ -103,13 +103,14 @@ class NetworkInterceptor implements InterceptorInterface {
       print("no internet error in onErrro");
       ref.read(networkErrorProvider.notifier).state =
           NetworkErrorType.noInternet;
+      // return;
     } else if (error.type == DioExceptionType.receiveTimeout || //timeout
         error.type == DioExceptionType.sendTimeout) {
       print("timeout error in onErrro");
       ref.read(networkErrorProvider.notifier).state = NetworkErrorType.timeout;
-    } else if (error.response?.statusCode == 401) {
+      // return;
+    } else if (error.response?.statusCode == 401) {    //unauthorized user/token , token expired
       final requestOptions = error.requestOptions;
-
       // Prevent infinite loop
       if (requestOptions.extra['retry'] == true) {
         await _forceLogout();
@@ -151,6 +152,7 @@ class NetworkInterceptor implements InterceptorInterface {
       print("server error in onErrro");
       ref.read(networkErrorProvider.notifier).state =
           NetworkErrorType.serverError;
+      // return;
     } else {
       print("unknown in onErrro");
       ref.read(networkErrorProvider.notifier).state = //unknown error

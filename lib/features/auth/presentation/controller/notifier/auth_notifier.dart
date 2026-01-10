@@ -16,6 +16,7 @@ class AuthNotifier extends _$AuthNotifier {
   }
 
   Future<void> signUp({
+    required String name,
     required String email,
     required String password
   }) async {
@@ -24,7 +25,7 @@ class AuthNotifier extends _$AuthNotifier {
 
     try{
       final repo = await ref.watch(authRepositoryLocatorProvider.future);
-      final result = await repo.singUp(email: email, password: password);
+      final result = await repo.singUp(name: name,email: email, password: password);
       result.fold(
         (failure){
           print("signup failure(iin notifier):${failure.toString()}");

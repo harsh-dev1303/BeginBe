@@ -3,13 +3,13 @@ import 'package:secure_fintech_bankingapp/core/cache/global_cache.dart';
 import 'package:secure_fintech_bankingapp/core/error/failures.dart';
 import 'package:secure_fintech_bankingapp/core/security/secure_token_manager.dart';
 import 'package:secure_fintech_bankingapp/core/url/base_url.dart';
-import 'package:secure_fintech_bankingapp/features/auth/data/models/login_model.dart';
-import 'package:secure_fintech_bankingapp/features/auth/data/models/signup_model.dart';
+import 'package:secure_fintech_bankingapp/features/auth/data/models/login_models/login_model.dart';
+import 'package:secure_fintech_bankingapp/features/auth/data/models/signup_models/signup_model.dart';
 import 'package:secure_fintech_bankingapp/network/domain/model/auth_token.dart';
 import 'package:secure_fintech_bankingapp/network/domain/network_client_interface.dart';
 
 abstract class AuthDatasource {
-  Future<SignupModel> signUp({required String email, required String password});
+  Future<SignupModel> signUp({required String name,required String email, required String password});
   Future<LoginModel> login({required String email, required String password});
 }
 
@@ -19,6 +19,7 @@ class AuthDatasourceImpl implements AuthDatasource {
   AuthDatasourceImpl(this.networkClient);
   @override
   Future<SignupModel> signUp({
+    required String name,
     required String email,
     required String password,
   }) async {
@@ -29,9 +30,9 @@ class AuthDatasourceImpl implements AuthDatasource {
 
       print("dio object:${dio}");
 
-      final reqBody = {"email": email, "password": password};
+      final reqBody = {"name": name,"email": email, "password": password};
 
-      final response = await dio.post("/register", data: reqBody);
+      final response = await dio.post("/auth/signup", data: reqBody);
       print("signup response in datasource:$response");
 
       //response consists Dio's dynamic data type object for ex:
@@ -108,6 +109,7 @@ class AuthDatasourceImpl implements AuthDatasource {
 
       // Everything else → let interceptor/global handle
       throw NetworkHandledException();
+      
     } on Exception catch (e) {
       // Any unexpected runtime issue
       print("SignUp exception Error - $e");
@@ -123,7 +125,7 @@ class AuthDatasourceImpl implements AuthDatasource {
     try {
       final dio = networkClient.customDio(authorizatioRequired: true);
       final reqBody = {"email": email, "password": password};
-      final response = await dio.post("/login", data: reqBody);
+      final response = await dio.post("/auth/login", data: reqBody);
       print("login Response:$response");
 
       final loginResJson = response.data;

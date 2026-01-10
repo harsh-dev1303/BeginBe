@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:secure_fintech_bankingapp/core/router/guards/auth_guard.dart';
 import 'package:secure_fintech_bankingapp/features/account_details/presentation/pages/account_details_page.dart';
 import 'package:secure_fintech_bankingapp/features/profile/presentation/pages/profiles_page.dart';
+import 'package:secure_fintech_bankingapp/features/service_branch/presentation/pages/branches_page.dart';
 import 'package:secure_fintech_bankingapp/features/settings/presentation/pages/settings_page.dart';
 import 'package:secure_fintech_bankingapp/features/transactions/presentation/pages/transactions_page.dart';
 import 'package:secure_fintech_bankingapp/presentation/pages/accounts_tab_page.dart';
@@ -28,6 +29,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(path: '/', page: SplashRoute.page, initial: true),
     AutoRoute(path: '/login', page: LoginRoute.page),
     AutoRoute(path: '/signup', page: SignupRoute.page),
+    AutoRoute(path: '/branch',page: BranchesRoute.page),
 
     AutoRoute(
       path: '/account_details',

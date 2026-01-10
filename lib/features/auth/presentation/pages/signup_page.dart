@@ -17,12 +17,14 @@ class SignupPage extends ConsumerStatefulWidget {
 
 class _SignupPageState extends ConsumerState<SignupPage> {
   
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
+    nameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -50,6 +52,12 @@ class _SignupPageState extends ConsumerState<SignupPage> {
         child: Column(
           children: [
             TextField(
+              controller: nameController,
+              decoration: InputDecoration(
+                hintText: "name"
+              ),
+            ),
+            TextField(
               controller: emailController,
               decoration: InputDecoration(
                 hintText: "email"
@@ -67,7 +75,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
               loading:()=> CircularProgressIndicator(),
               orElse: ()=>ElevatedButton(
                 onPressed: (){
-                  ref.read(authNotifierProvider.notifier).signUp(email: emailController.text.trim(), password: passwordController.text.trim());
+                  ref.read(authNotifierProvider.notifier).signUp(name: nameController.text.trim(),email: emailController.text.trim(), password: passwordController.text.trim());
                 }, 
                 child: Text("Sign Up")
                 )
