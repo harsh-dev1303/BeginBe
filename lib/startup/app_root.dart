@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secure_fintech_bankingapp/core/cache/global_cache.dart';
 import 'package:secure_fintech_bankingapp/core/router/app_router.dart';
 import 'package:secure_fintech_bankingapp/core/security/secure_token_manager.dart';
+import 'package:secure_fintech_bankingapp/core/theme/theme.dart';
 import 'package:secure_fintech_bankingapp/features/auth/presentation/controller/notifier/auth_notifier.dart';
 import 'package:secure_fintech_bankingapp/features/auth/presentation/controller/state/auth_state.dart';
 import 'package:secure_fintech_bankingapp/main.dart';
@@ -57,9 +58,10 @@ class _AppRootState extends ConsumerState<AppRoot> with WidgetsBindingObserver {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: appRouter.config(),
       title: 'Flutter Demo',
-      theme: ThemeData(
+      theme: AppTheme.darkTheme/*ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
@@ -70,7 +72,7 @@ class _AppRootState extends ConsumerState<AppRoot> with WidgetsBindingObserver {
           showUnselectedLabels: true,
           type: BottomNavigationBarType.fixed,
         ),
-      ),
+      )*/,
       builder: (context, child) {
         return Consumer(
           builder: (context, ref, _) {

@@ -46,6 +46,7 @@ dependencies:
   dart_jsonwebtoken: ^3.1.1
   riverpod_annotation: ^2.3.5
   encrypt: ^5.0.3
+  url_launcher: ^6.3.0
  
 
   # The following adds the Cupertino Icons font to your application.
@@ -76,11 +77,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+   - assets/images/mock/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

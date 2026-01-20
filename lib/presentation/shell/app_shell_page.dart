@@ -12,8 +12,8 @@ class AppShellPage extends ConsumerWidget {
     return AutoTabsScaffold(
       routes: [
         const HomeTabRoute(),
-        const AccountsTabRoute(),
-        const TransactionTabRoute(),
+        const HistoryTabRoute(),
+        const LiveTokenTabRoute(),
         const ProfileTabRoute(),
       ],
 
@@ -23,10 +23,10 @@ class AppShellPage extends ConsumerWidget {
           onTap: tabsRouter.setActiveIndex,
           items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.account_balance), label: 'Accounts'),
+            BottomNavigationBarItem(icon: Icon(Icons.account_balance), label: 'History'),
             BottomNavigationBarItem(
               icon: Icon(Icons.swap_horiz),
-              label: 'Transaction'
+              label: 'Live Token'
               ),
               BottomNavigationBarItem(
               icon: Icon(Icons.person),

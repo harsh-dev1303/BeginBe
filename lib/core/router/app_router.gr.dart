@@ -74,22 +74,6 @@ class AccountsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AccountsTabPage]
-class AccountsTabRoute extends PageRouteInfo<void> {
-  const AccountsTabRoute({List<PageRouteInfo>? children})
-    : super(AccountsTabRoute.name, initialChildren: children);
-
-  static const String name = 'AccountsTabRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const AccountsTabPage();
-    },
-  );
-}
-
-/// generated route for
 /// [AppShellPage]
 class AppShellRoute extends PageRouteInfo<void> {
   const AppShellRoute({List<PageRouteInfo>? children})
@@ -103,6 +87,53 @@ class AppShellRoute extends PageRouteInfo<void> {
       return const AppShellPage();
     },
   );
+}
+
+/// generated route for
+/// [BranchDetailPage]
+class BranchDetailRoute extends PageRouteInfo<BranchDetailRouteArgs> {
+  BranchDetailRoute({
+    Key? key,
+    required String branchId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         BranchDetailRoute.name,
+         args: BranchDetailRouteArgs(key: key, branchId: branchId),
+         initialChildren: children,
+       );
+
+  static const String name = 'BranchDetailRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<BranchDetailRouteArgs>();
+      return BranchDetailPage(key: args.key, branchId: args.branchId);
+    },
+  );
+}
+
+class BranchDetailRouteArgs {
+  const BranchDetailRouteArgs({this.key, required this.branchId});
+
+  final Key? key;
+
+  final String branchId;
+
+  @override
+  String toString() {
+    return 'BranchDetailRouteArgs{key: $key, branchId: $branchId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! BranchDetailRouteArgs) return false;
+    return key == other.key && branchId == other.branchId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ branchId.hashCode;
 }
 
 /// generated route for
@@ -153,6 +184,69 @@ class BranchesRouteArgs {
 }
 
 /// generated route for
+/// [CategoriesPage]
+class CategoriesRoute extends PageRouteInfo<CategoriesRouteArgs> {
+  CategoriesRoute({
+    Key? key,
+    required String branchId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         CategoriesRoute.name,
+         args: CategoriesRouteArgs(key: key, branchId: branchId),
+         initialChildren: children,
+       );
+
+  static const String name = 'CategoriesRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<CategoriesRouteArgs>();
+      return CategoriesPage(key: args.key, branchId: args.branchId);
+    },
+  );
+}
+
+class CategoriesRouteArgs {
+  const CategoriesRouteArgs({this.key, required this.branchId});
+
+  final Key? key;
+
+  final String branchId;
+
+  @override
+  String toString() {
+    return 'CategoriesRouteArgs{key: $key, branchId: $branchId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! CategoriesRouteArgs) return false;
+    return key == other.key && branchId == other.branchId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ branchId.hashCode;
+}
+
+/// generated route for
+/// [HistoryTabPage]
+class HistoryTabRoute extends PageRouteInfo<void> {
+  const HistoryTabRoute({List<PageRouteInfo>? children})
+    : super(HistoryTabRoute.name, initialChildren: children);
+
+  static const String name = 'HistoryTabRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const HistoryTabPage();
+    },
+  );
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -180,6 +274,22 @@ class HomeTabRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomeTabPage();
+    },
+  );
+}
+
+/// generated route for
+/// [LiveTokenTabPage]
+class LiveTokenTabRoute extends PageRouteInfo<void> {
+  const LiveTokenTabRoute({List<PageRouteInfo>? children})
+    : super(LiveTokenTabRoute.name, initialChildren: children);
+
+  static const String name = 'LiveTokenTabRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const LiveTokenTabPage();
     },
   );
 }
@@ -281,19 +391,50 @@ class SplashRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [TransactionTabPage]
-class TransactionTabRoute extends PageRouteInfo<void> {
-  const TransactionTabRoute({List<PageRouteInfo>? children})
-    : super(TransactionTabRoute.name, initialChildren: children);
+/// [TokenPreviewPage]
+class TokenPreviewRoute extends PageRouteInfo<TokenPreviewRouteArgs> {
+  TokenPreviewRoute({
+    Key? key,
+    required String categoryId,
+    List<PageRouteInfo>? children,
+  }) : super(
+         TokenPreviewRoute.name,
+         args: TokenPreviewRouteArgs(key: key, categoryId: categoryId),
+         initialChildren: children,
+       );
 
-  static const String name = 'TransactionTabRoute';
+  static const String name = 'TokenPreviewRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TransactionTabPage();
+      final args = data.argsAs<TokenPreviewRouteArgs>();
+      return TokenPreviewPage(key: args.key, categoryId: args.categoryId);
     },
   );
+}
+
+class TokenPreviewRouteArgs {
+  const TokenPreviewRouteArgs({this.key, required this.categoryId});
+
+  final Key? key;
+
+  final String categoryId;
+
+  @override
+  String toString() {
+    return 'TokenPreviewRouteArgs{key: $key, categoryId: $categoryId}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TokenPreviewRouteArgs) return false;
+    return key == other.key && categoryId == other.categoryId;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ categoryId.hashCode;
 }
 
 /// generated route for

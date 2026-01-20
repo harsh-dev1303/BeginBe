@@ -1,7 +1,9 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:secure_fintech_bankingapp/core/router/app_router.dart';
 import 'package:secure_fintech_bankingapp/features/service_branch/presentation/controller/notifier/branches_notifier.dart';
 
 
@@ -41,7 +43,7 @@ class BranchesPage extends ConsumerWidget {
              return ListView.separated(
               itemCount: branchList.length,
               separatorBuilder: (_, _) => Divider(height: 1),
-              itemBuilder: (context, index){
+              itemBuilder: (bContext, index){
                 final branch = branchList[index];
                 return ListTile(
                   leading: CircleAvatar(child: Icon(Icons.business)),
@@ -55,7 +57,8 @@ class BranchesPage extends ConsumerWidget {
                   ) ,
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                     //will navigate to categories page afterwards
+                     context.router.push(BranchDetailRoute(branchId: branch.branchId));
+                     
                   },
                 );
               },

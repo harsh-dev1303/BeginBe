@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.secure_fintech_bankingapp"
-    compileSdk =  34 //flutter.compileSdkVersion
+    compileSdk =  flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

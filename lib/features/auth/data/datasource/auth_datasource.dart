@@ -104,6 +104,7 @@ class AuthDatasourceImpl implements AuthDatasource {
 
       // BUSINESS / API error (ex: email already exists)
       if (e.response?.statusCode == 400) {
+       
         throw ServiceFailure(e.response?.data?['error'] ?? "Unable to Signup");
       }
 
@@ -151,6 +152,10 @@ class AuthDatasourceImpl implements AuthDatasource {
 
       // BUSINESS ERROR (wrong email/password)
       if (e.response?.statusCode == 400) {
+        print("login bussiness/400 error res : ${e.response}");
+        print("login bussiness/400 error res.data: ${e.response?.data}");
+        print("login bussiness/400 error res.data.err: ${e.response?.data?['error']}");
+        print("login bussiness/400 error status: ${e.response?.statusCode}");
         throw ServiceFailure(
           e.response?.data?['error'] ?? 'Invalid credentials',
         );
