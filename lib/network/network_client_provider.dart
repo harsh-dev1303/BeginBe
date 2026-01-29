@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:secure_fintech_bankingapp/core/cache/global_cache.dart';
+import 'package:secure_fintech_bankingapp/core/security/secure_active_tokenId_manager.dart';
 import 'package:secure_fintech_bankingapp/core/security/secure_token_manager.dart';
 import 'package:secure_fintech_bankingapp/network/data/network_client.dart';
 import 'package:secure_fintech_bankingapp/network/domain/model/auth_token.dart';
@@ -25,5 +26,16 @@ final authTokenProvider = FutureProvider<String?>((_) async {
 });
 
 final networkErrorProvider = StateProvider<NetworkErrorType?>((ref){
+  return null;
+});
+
+final activetokenIdProvider = FutureProvider.autoDispose<String?>((ref) async {  
+   final activeTokenId = await SecureActiveTokenIdManager.readTokenId();
+   print("activeTokenId in activetokenIdProvider:$activeTokenId");
+   return activeTokenId;
+   
+});
+
+final liveTokenDateProvider = StateProvider<String?>((ref){
   return null;
 });

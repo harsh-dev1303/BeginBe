@@ -23,15 +23,15 @@ class BranchDetailPage extends ConsumerWidget {
       appBar: AppBar(
         title: branchDetailNotifier.maybeWhen(
           data: (data) => Text(data.branchName),
-          orElse: ()=>Text("Branch")
-          )
+          orElse: () => Text("Branch"),
+        ),
         /*branchDetailNotifier.when(
           data: (data) {
             return Text(data.branchName);
           },
           error: (error, stackTrace) => Text(error.toString()),
           loading: () => CircularProgressIndicator(),
-        )*/,
+        )*/
       ),
       body: branchDetailNotifier.when(
         data: (branchDetail) {
@@ -99,18 +99,88 @@ class _BranchHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            branch.branchName,
-            style: const TextStyle(
-              color: AppPallete.whiteColor,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white10,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.store,
+                  color: AppPallete.whiteColor,
+                  size: 26,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      branch.branchName,
+                      style: const TextStyle(
+                        color: AppPallete.whiteColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      branch.branchAddress,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            branch.branchAddress,
-            style: const TextStyle(color: Colors.white70, fontSize: 13),
+
+          const SizedBox(height: 10),
+
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              Chip(
+                backgroundColor: Colors.white12,
+                side: const BorderSide(color: Colors.white24),
+                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                avatar: const Icon(
+                  Icons.access_time,
+                  color: AppPallete.whiteColor,
+                  size: 18,
+                ),
+                label: Text(
+                  branch.timing,
+                  style: const TextStyle(
+                    color: AppPallete.whiteColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Chip(
+                backgroundColor: Colors.white12,
+                side: const BorderSide(color: Colors.white24),
+                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
+                avatar: const Icon(
+                  Icons.confirmation_number,
+                  color: AppPallete.whiteColor,
+                  size: 18,
+                ),
+                label: Text(
+                  'Avg Wait: ${branch.avgWaitTime}',
+                  style: const TextStyle(
+                    color: AppPallete.whiteColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -136,7 +206,7 @@ class _InfoRow extends StatelessWidget {
         const SizedBox(width: 12),
         _InfoCard(
           icon: Icons.timelapse,
-          label: "Avg Wait time",
+          label: "Avg Wait",
           value: branch.avgWaitTime,
         ),
       ],
@@ -159,25 +229,51 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(14),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppPallete.borderColor,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(icon, color: AppPallete.gradient3),
-            const SizedBox(height: 6),
-            Text(
-              value,
-              style: const TextStyle(
-                color: AppPallete.whiteColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              label,
-              style: const TextStyle(color: AppPallete.greyColor, fontSize: 12),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: AppPallete.backgroundColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(icon, color: AppPallete.whiteColor),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        value,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppPallete.whiteColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        label,
+                        style: const TextStyle(
+                          color: AppPallete.greyColor,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -194,23 +290,30 @@ class _OverviewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Overview",
-          style: TextStyle(
-            color: AppPallete.whiteColor,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: AppPallete.borderColor,
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Overview",
+            style: TextStyle(
+              color: AppPallete.whiteColor,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          overview,
-          style: const TextStyle(color: AppPallete.greyColor, height: 1.5),
-        ),
-      ],
+          const SizedBox(height: 8),
+          Text(
+            overview,
+            style: const TextStyle(color: AppPallete.greyColor, height: 1.5),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -243,18 +346,37 @@ class _LocationSection extends StatelessWidget {
             color: AppPallete.borderColor,
             borderRadius: BorderRadius.circular(14),
           ),
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.location_on, color: AppPallete.gradient2),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  address,
-                  style: const TextStyle(
-                    color: AppPallete.whiteColor,
-                    fontSize: 13,
+              Row(
+                children: [
+                  const Icon(Icons.location_on, color: AppPallete.gradient2),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      address,
+                      style: const TextStyle(
+                        color: AppPallete.whiteColor,
+                        fontSize: 13,
+                      ),
+                    ),
                   ),
-                ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(Icons.explore, color: AppPallete.gradient3),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Lat: ${location.latitude.toStringAsFixed(4)}  •  Lng: ${location.longitude.toStringAsFixed(4)}',
+                    style: const TextStyle(
+                      color: AppPallete.greyColor,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -267,15 +389,17 @@ class _LocationSection extends StatelessWidget {
           child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               foregroundColor: AppPallete.gradient2,
-              side: BorderSide(color: AppPallete.gradient2),
+              side: const BorderSide(color: AppPallete.gradient2),
+              padding: const EdgeInsets.symmetric(vertical: 14),
             ),
             onPressed: () {
-              try{
-              openMap(location);
-              }catch(e){
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+              try {
+                openMap(location);
+              } catch (e) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(e.toString())));
               }
-              // open google maps using lat/lng
             },
             child: const Text("View on Map"),
           ),
@@ -284,7 +408,6 @@ class _LocationSection extends StatelessWidget {
     );
   }
 }
-
 
 void openMap(Geolocation location) async {
   final url =
@@ -296,14 +419,10 @@ void openMap(Geolocation location) async {
 Future<void> openUrl(String url) async {
   final uri = Uri.parse(url);
 
-  if (!await launchUrl(
-    uri,
-    mode: LaunchMode.externalApplication,
-  )) {
+  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
     throw 'Could not launch $url';
   }
 }
-
 
 //View Counters Button
 

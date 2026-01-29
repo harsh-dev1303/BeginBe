@@ -10,7 +10,7 @@ final appRouter = AppRouter();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await initCache();
+  await initCache();
   runApp(const MyApp());
 }
 

@@ -1,13 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:secure_fintech_bankingapp/core/router/guards/auth_guard.dart';
+import 'package:secure_fintech_bankingapp/features/Live_queue/presentation/pages/live_queue_page.dart';
 import 'package:secure_fintech_bankingapp/features/account_details/presentation/pages/account_details_page.dart';
 import 'package:secure_fintech_bankingapp/features/branch_category/presentation/pages/categories_page.dart';
 import 'package:secure_fintech_bankingapp/features/branch_detail/presentation/pages/branch_detail_page.dart';
 import 'package:secure_fintech_bankingapp/features/profile/presentation/pages/profiles_page.dart';
 import 'package:secure_fintech_bankingapp/features/service_branch/presentation/pages/branches_page.dart';
 import 'package:secure_fintech_bankingapp/features/settings/presentation/pages/settings_page.dart';
-import 'package:secure_fintech_bankingapp/features/token_preview_screen.dart/presentation/pages/token_preview_page.dart';
+import 'package:secure_fintech_bankingapp/features/token_confirmation/presentation/pages/token_confirmation_page.dart';
+import 'package:secure_fintech_bankingapp/features/token_preview/presentation/pages/token_preview_page.dart';
 import 'package:secure_fintech_bankingapp/features/transactions/presentation/pages/transactions_page.dart';
 import 'package:secure_fintech_bankingapp/presentation/pages/history_tab_page.dart';
 import 'package:secure_fintech_bankingapp/presentation/pages/home_tab_page.dart';
@@ -36,6 +38,7 @@ class AppRouter extends RootStackRouter {
     AutoRoute(path: '/category',page: CategoriesRoute.page),
     AutoRoute(path: '/branch_detail',page: BranchDetailRoute.page),
     AutoRoute(path: '/token_preview',page:TokenPreviewRoute.page),
+    AutoRoute(path: '/token_confirmation',page:TokenConfirmationRoute.page),
 
     AutoRoute(
       path: '/account_details',

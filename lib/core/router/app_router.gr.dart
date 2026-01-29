@@ -75,18 +75,49 @@ class AccountsRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [AppShellPage]
-class AppShellRoute extends PageRouteInfo<void> {
-  const AppShellRoute({List<PageRouteInfo>? children})
-    : super(AppShellRoute.name, initialChildren: children);
+class AppShellRoute extends PageRouteInfo<AppShellRouteArgs> {
+  AppShellRoute({
+    Key? key,
+    required int initialIndex,
+    List<PageRouteInfo>? children,
+  }) : super(
+         AppShellRoute.name,
+         args: AppShellRouteArgs(key: key, initialIndex: initialIndex),
+         initialChildren: children,
+       );
 
   static const String name = 'AppShellRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AppShellPage();
+      final args = data.argsAs<AppShellRouteArgs>();
+      return AppShellPage(key: args.key, initialIndex: args.initialIndex);
     },
   );
+}
+
+class AppShellRouteArgs {
+  const AppShellRouteArgs({this.key, required this.initialIndex});
+
+  final Key? key;
+
+  final int initialIndex;
+
+  @override
+  String toString() {
+    return 'AppShellRouteArgs{key: $key, initialIndex: $initialIndex}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! AppShellRouteArgs) return false;
+    return key == other.key && initialIndex == other.initialIndex;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ initialIndex.hashCode;
 }
 
 /// generated route for
@@ -279,6 +310,64 @@ class HomeTabRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [LiveQueuePage]
+class LiveQueueRoute extends PageRouteInfo<LiveQueueRouteArgs> {
+  LiveQueueRoute({
+    Key? key,
+    required String tokenId,
+    required String date,
+    List<PageRouteInfo>? children,
+  }) : super(
+         LiveQueueRoute.name,
+         args: LiveQueueRouteArgs(key: key, tokenId: tokenId, date: date),
+         initialChildren: children,
+       );
+
+  static const String name = 'LiveQueueRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<LiveQueueRouteArgs>();
+      return LiveQueuePage(
+        key: args.key,
+        tokenId: args.tokenId,
+        date: args.date,
+      );
+    },
+  );
+}
+
+class LiveQueueRouteArgs {
+  const LiveQueueRouteArgs({
+    this.key,
+    required this.tokenId,
+    required this.date,
+  });
+
+  final Key? key;
+
+  final String tokenId;
+
+  final String date;
+
+  @override
+  String toString() {
+    return 'LiveQueueRouteArgs{key: $key, tokenId: $tokenId, date: $date}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! LiveQueueRouteArgs) return false;
+    return key == other.key && tokenId == other.tokenId && date == other.date;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ tokenId.hashCode ^ date.hashCode;
+}
+
+/// generated route for
 /// [LiveTokenTabPage]
 class LiveTokenTabRoute extends PageRouteInfo<void> {
   const LiveTokenTabRoute({List<PageRouteInfo>? children})
@@ -388,6 +477,70 @@ class SplashRoute extends PageRouteInfo<void> {
       return const SplashPage();
     },
   );
+}
+
+/// generated route for
+/// [TokenConfirmationPage]
+class TokenConfirmationRoute extends PageRouteInfo<TokenConfirmationRouteArgs> {
+  TokenConfirmationRoute({
+    Key? key,
+    required String categoryId,
+    required String date,
+    List<PageRouteInfo>? children,
+  }) : super(
+         TokenConfirmationRoute.name,
+         args: TokenConfirmationRouteArgs(
+           key: key,
+           categoryId: categoryId,
+           date: date,
+         ),
+         initialChildren: children,
+       );
+
+  static const String name = 'TokenConfirmationRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<TokenConfirmationRouteArgs>();
+      return TokenConfirmationPage(
+        key: args.key,
+        categoryId: args.categoryId,
+        date: args.date,
+      );
+    },
+  );
+}
+
+class TokenConfirmationRouteArgs {
+  const TokenConfirmationRouteArgs({
+    this.key,
+    required this.categoryId,
+    required this.date,
+  });
+
+  final Key? key;
+
+  final String categoryId;
+
+  final String date;
+
+  @override
+  String toString() {
+    return 'TokenConfirmationRouteArgs{key: $key, categoryId: $categoryId, date: $date}';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! TokenConfirmationRouteArgs) return false;
+    return key == other.key &&
+        categoryId == other.categoryId &&
+        date == other.date;
+  }
+
+  @override
+  int get hashCode => key.hashCode ^ categoryId.hashCode ^ date.hashCode;
 }
 
 /// generated route for

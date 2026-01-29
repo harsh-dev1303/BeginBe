@@ -124,7 +124,7 @@ class _AppRootState extends ConsumerState<AppRoot> with WidgetsBindingObserver {
             ref.listen<AuthState>(authNotifierProvider, (prev, next) {
               next.whenOrNull(
                 authenticated: () {
-                  appRouter.replaceAll([const AppShellRoute()]);
+                  appRouter.replaceAll([AppShellRoute(initialIndex: 0)]);
                 },
                 signupSuccess: () {
                   appRouter.replaceAll([const LoginRoute()]);

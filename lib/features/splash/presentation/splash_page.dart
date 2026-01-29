@@ -35,7 +35,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
         },
         authenticated: () {
           print("authenticated is running");
-          context.router.replaceAll([const AppShellRoute()]);
+          context.router.replaceAll([ AppShellRoute(initialIndex: 0)]);
         },
       );
     });
