@@ -315,11 +315,10 @@ class LiveQueueRoute extends PageRouteInfo<LiveQueueRouteArgs> {
   LiveQueueRoute({
     Key? key,
     required String tokenId,
-    required String date,
     List<PageRouteInfo>? children,
   }) : super(
          LiveQueueRoute.name,
-         args: LiveQueueRouteArgs(key: key, tokenId: tokenId, date: date),
+         args: LiveQueueRouteArgs(key: key, tokenId: tokenId),
          initialChildren: children,
        );
 
@@ -329,42 +328,32 @@ class LiveQueueRoute extends PageRouteInfo<LiveQueueRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<LiveQueueRouteArgs>();
-      return LiveQueuePage(
-        key: args.key,
-        tokenId: args.tokenId,
-        date: args.date,
-      );
+      return LiveQueuePage(key: args.key, tokenId: args.tokenId);
     },
   );
 }
 
 class LiveQueueRouteArgs {
-  const LiveQueueRouteArgs({
-    this.key,
-    required this.tokenId,
-    required this.date,
-  });
+  const LiveQueueRouteArgs({this.key, required this.tokenId});
 
   final Key? key;
 
   final String tokenId;
 
-  final String date;
-
   @override
   String toString() {
-    return 'LiveQueueRouteArgs{key: $key, tokenId: $tokenId, date: $date}';
+    return 'LiveQueueRouteArgs{key: $key, tokenId: $tokenId}';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! LiveQueueRouteArgs) return false;
-    return key == other.key && tokenId == other.tokenId && date == other.date;
+    return key == other.key && tokenId == other.tokenId;
   }
 
   @override
-  int get hashCode => key.hashCode ^ tokenId.hashCode ^ date.hashCode;
+  int get hashCode => key.hashCode ^ tokenId.hashCode;
 }
 
 /// generated route for

@@ -9,7 +9,7 @@ import 'package:secure_fintech_bankingapp/core/theme/theme.dart';
 import 'package:secure_fintech_bankingapp/features/auth/presentation/controller/notifier/auth_notifier.dart';
 import 'package:secure_fintech_bankingapp/features/auth/presentation/controller/state/auth_state.dart';
 import 'package:secure_fintech_bankingapp/main.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 import 'package:secure_fintech_bankingapp/network/state/network_error.dart';
 
 //We created AppRoot because we need:

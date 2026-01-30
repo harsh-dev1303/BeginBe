@@ -2,7 +2,7 @@ import 'package:secure_fintech_bankingapp/features/auth/data/datasource/auth_dat
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:secure_fintech_bankingapp/features/auth/data/repository/auth_repo_impl.dart';
 import 'package:secure_fintech_bankingapp/features/auth/domain/repository/auth_repository.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 
 part 'auth_locator.g.dart';
 

@@ -7,4 +7,5 @@ import 'package:secure_fintech_bankingapp/core/cache/global_cache.dart';
 Future<void> initCache() async {
   await Hive.initFlutter();
   await GlobalCache.init();
+  
 }

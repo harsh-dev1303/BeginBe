@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:secure_fintech_bankingapp/features/token_preview/data/datasource/token_preview_datasource.dart';
 import 'package:secure_fintech_bankingapp/features/token_preview/data/repository/token_preview_repo_Impl.dart';
 import 'package:secure_fintech_bankingapp/features/token_preview/domain/repository/token_preview_repo.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 
 part 'token_preview_locator.g.dart';
 

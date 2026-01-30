@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:secure_fintech_bankingapp/features/home/data/datasource/home_datasource.dart';
 import 'package:secure_fintech_bankingapp/features/home/data/repository/home_repo_impl.dart';
 import 'package:secure_fintech_bankingapp/features/home/domain/repository/home_repo.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 
 part 'home_locator.g.dart';
 

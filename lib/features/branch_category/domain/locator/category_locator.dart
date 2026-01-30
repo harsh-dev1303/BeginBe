@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:secure_fintech_bankingapp/features/branch_category/data/datasource/category_datasource.dart';
 import 'package:secure_fintech_bankingapp/features/branch_category/data/repository/category_repo_impl.dart';
 import 'package:secure_fintech_bankingapp/features/branch_category/domain/repository/category_repo.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 
 part 'category_locator.g.dart';
 

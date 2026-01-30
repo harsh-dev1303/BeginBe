@@ -1,10 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:secure_fintech_bankingapp/core/router/app_router.dart';
 import 'package:secure_fintech_bankingapp/core/theme/app_pallete.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/global_notifiers.dart/third_day_tokenId_notifier.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/global_notifiers.dart/todays_tokenId_notifier.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/global_notifiers.dart/tomorrows_tokenId_notifier.dart';
+import 'package:secure_fintech_bankingapp/features/token_confirmation/data/model/stored_token_info/stored_token_model.dart';
 import 'package:secure_fintech_bankingapp/features/token_confirmation/presentation/controller/notifier/token_confirmation_notifier.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 
 @RoutePage()
 class TokenConfirmationPage extends ConsumerWidget {
@@ -21,6 +26,62 @@ class TokenConfirmationPage extends ConsumerWidget {
     final tokenConfirmation = ref.watch(
       tokenConfirmationNotifierProvider(categoryId, date),
     );
+
+    ref.listen(tokenConfirmationNotifierProvider(categoryId, date), (
+      prev,
+      next,
+    ) {
+      next.whenOrNull(
+        data: (tokenConfirm) {
+          final dateFormatter = DateFormat('dd MMM yyyy');
+          final DateTime today = DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          );
+          final DateTime tomorrow = today.add(Duration(days: 1));
+          final DateTime dayAfterTomorrow = today.add(Duration(days: 2));
+
+          if (tokenConfirm.date == dateFormatter.format(today)) {
+            print("token is saved in today");
+            ref
+                .read(todaysTokenIdNotifierProvider.notifier)
+                .addStoredTokenModel(
+                  StoredTokenModel(
+                    tokenId: tokenConfirm.tokenNumber,
+                    categoryName: tokenConfirm.categoryName,
+                    branchName: tokenConfirm.branchName,
+                  ),
+                );
+
+            // }
+          } else if (tokenConfirm.date == dateFormatter.format(tomorrow)) {
+            print("token is saved in tomorrow");
+            ref
+                .read(tomorrowsTokenIdNotifierProvider.notifier)
+                .addStoredTokenModel(
+                  StoredTokenModel(
+                    tokenId: tokenConfirm.tokenNumber,
+                    categoryName: tokenConfirm.categoryName,
+                    branchName: tokenConfirm.branchName,
+                  ),
+                );
+          } else if (tokenConfirm.date ==
+              dateFormatter.format(dayAfterTomorrow)) {
+            print("token is saved in day after tomorrow");
+            ref
+                .read(thirdDayTokenIdNotifierProvider.notifier)
+                .addStoredTokenModel(
+                  StoredTokenModel(
+                    tokenId: tokenConfirm.tokenNumber,
+                    categoryName: tokenConfirm.categoryName,
+                    branchName: tokenConfirm.branchName,
+                  ),
+                );
+          }
+        },
+      );
+    });
     return Scaffold(
       appBar: AppBar(title: Text("Token Confirmation")),
       body: tokenConfirmation.when(
@@ -65,15 +126,12 @@ class TokenConfirmationPage extends ConsumerWidget {
                       ),
                     ),
                     onPressed: () {
-                      ref.read(liveTokenDateProvider.notifier).state = tokenConfirm.date;
-                      context.router.replaceAll(
-                        [AppShellRoute(
-                         initialIndex: 2,
-                         children: [
-                          LiveTokenTabRoute()
-                         ]
-                      )]
-                      );
+                      context.router.replaceAll([
+                        AppShellRoute(
+                          initialIndex: 2,
+                          children: [LiveTokenTabRoute()],
+                        ),
+                      ]);
                     },
                     child: const Text(
                       "Go to Live Queue",

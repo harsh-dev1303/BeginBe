@@ -5,6 +5,7 @@ import 'package:secure_fintech_bankingapp/core/error/failures.dart';
 import 'package:secure_fintech_bankingapp/core/security/secure_active_tokenId_manager.dart';
 import 'package:secure_fintech_bankingapp/core/typedefs.dart';
 import 'package:secure_fintech_bankingapp/features/token_confirmation/data/datasource/token_confirmation_datasource.dart';
+import 'package:secure_fintech_bankingapp/features/token_confirmation/data/model/stored_token_info/stored_token_model.dart';
 import 'package:secure_fintech_bankingapp/features/token_confirmation/domain/entity/token_confirmation_entity.dart';
 import 'package:secure_fintech_bankingapp/features/token_confirmation/domain/repository/token_confirmation_repo.dart';
 
@@ -21,28 +22,34 @@ class TokenConfirmationRepoimpl implements TokenConfirmationRepo {
       final DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
       final DateTime tomorrow = today.add(Duration(days: 1));
       final DateTime dayAfterTomorrow = today.add(Duration(days: 2));
+      
       final tokenConfirmationModel = await tokenConfirmationDatasource.fetchTokenConfirmation(categoryId, date);
+      print("token confirmation date:${tokenConfirmationModel.date}");
       if(tokenConfirmationModel.date == dateFormatter.format(today)){
-        final existingTodaysTokenId = GlobalCache.getInstance.getTodayActiveTokenId();
-        if(!existingTodaysTokenId.contains(tokenConfirmationModel.tokenNumber)){
-        existingTodaysTokenId.add(tokenConfirmationModel.tokenNumber);
-        await GlobalCache.getInstance.setTodayActiveTokenId(tokensIds:existingTodaysTokenId );
-      }
+        print("token is saved in today");
+      //   final existingTodaysTokenId = GlobalCache.getInstance.getTodayActiveTokenId();
+      //   if(!existingTodaysTokenId.contains(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName))){
+      //   existingTodaysTokenId.add(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName));
+      //   await GlobalCache.getInstance.setTodayActiveTokenId(tokensIds:existingTodaysTokenId );
+      //   print("token stored after setting ${GlobalCache.getInstance.getTodayActiveTokenId()}");
+        
+      // }
       }else if(tokenConfirmationModel.date == dateFormatter.format(tomorrow)){
+        print("token is saved in tomorrow");
          final existingTomorrowsTokenId = GlobalCache.getInstance.getTomorrowActiveTokenId();
-        if(!existingTomorrowsTokenId.contains(tokenConfirmationModel.tokenNumber)){
-         existingTomorrowsTokenId.add(tokenConfirmationModel.tokenNumber);
+        if(!existingTomorrowsTokenId.contains(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName))){
+         existingTomorrowsTokenId.add(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName));
         await GlobalCache.getInstance.setTomorrowActiveTokenId(tokensIds: existingTomorrowsTokenId );
       }
       }else if(tokenConfirmationModel.date == dateFormatter.format(dayAfterTomorrow)){
+        print("token is saved in day after tomorrow");
         final existingThirdDaysTokenId = GlobalCache.getInstance.getThirdDayActiveTokenId();
-        if(!existingThirdDaysTokenId.contains(tokenConfirmationModel.tokenNumber)){
-         existingThirdDaysTokenId.add(tokenConfirmationModel.tokenNumber);
+        if(!existingThirdDaysTokenId.contains(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName))){
+         existingThirdDaysTokenId.add(StoredTokenModel(tokenId: tokenConfirmationModel.tokenNumber,categoryName: tokenConfirmationModel.categoryName,branchName: tokenConfirmationModel.branchName));
         await GlobalCache.getInstance.setThirdDayActiveTokenId(tokensIds: existingThirdDaysTokenId );
         }
-      }
-      await SecureActiveTokenIdManager.writeTokenId(tokenId: tokenConfirmationModel.tokenNumber);  
-      print("saved active token id after writing in TokenConfirmationRepoimpl:${await SecureActiveTokenIdManager.readTokenId()} ");
+      } 
+ 
       return Either.right(tokenConfirmationModel.toDomain());
 
     }on ServiceFailure catch(e){

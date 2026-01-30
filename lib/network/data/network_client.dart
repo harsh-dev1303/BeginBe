@@ -11,7 +11,7 @@ import 'package:secure_fintech_bankingapp/network/domain/cookie_manager_interfac
 import 'package:secure_fintech_bankingapp/network/domain/header_manager_interface.dart';
 import 'package:secure_fintech_bankingapp/network/domain/interceptor.dart';
 import 'package:secure_fintech_bankingapp/network/domain/network_client_interface.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 import 'package:secure_fintech_bankingapp/network/security/encryption_decryption/locator_encrypt_decrypt/encrypt_decrypt_provider.dart';
 
 class NetworkClient implements NetworkClientInterface {

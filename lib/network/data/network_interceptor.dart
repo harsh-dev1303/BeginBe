@@ -13,7 +13,7 @@ import 'package:secure_fintech_bankingapp/features/auth/presentation/controller/
 import 'package:secure_fintech_bankingapp/network/domain/cookie_manager_interface.dart';
 import 'package:secure_fintech_bankingapp/network/domain/interceptor.dart';
 import 'package:secure_fintech_bankingapp/network/domain/model/auth_token.dart';
-import 'package:secure_fintech_bankingapp/network/network_client_provider.dart';
+import 'package:secure_fintech_bankingapp/features/global_providers/providers.dart';
 import 'package:secure_fintech_bankingapp/network/security/encrypt_config.dart';
 import 'package:secure_fintech_bankingapp/network/security/encryption_decryption/encrypt_decrypt_service.dart';
 import 'package:secure_fintech_bankingapp/network/state/network_error.dart';
